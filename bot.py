@@ -65,7 +65,7 @@ def charcterCleaner(dataString):
 
 #### TWEET PROCESSING
 def twitterTweetBot():
-    with open('/home/sal/projects/twitter/tweetBotLogger.csv', 'rb') as tweetLog:
+    with open('tweetBotLogger.csv', 'rb') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow[0])
@@ -107,7 +107,7 @@ def twitterTweetBot():
 if __name__ == "__main__":
     randomNumber = random.randint(0, 55)
     print (randomNumber)
-    if randomNumber <= 25:
+    if randomNumber <= 20:  # This should allow postings to happen less than half the time
         sleepTime = randomNumber * 60
         currentHour = datetime.datetime.now().hour
         dayOfTheWeek = datetime.datetime.today().weekday()
