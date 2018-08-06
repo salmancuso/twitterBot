@@ -7,10 +7,15 @@ import datetime
 import random
 import sys
 import re
+import os
 
+
+def pwdDir ():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    return dir_path
 
 def getCreds():
-    with open('mycreds.csv', 'r') as credsRaw:
+    with open(str(pwdDir())+str('/mycreds.csv'), 'r') as credsRaw:
         credsData = csv.reader(credsRaw, delimiter=",")
         return credsData
 
@@ -50,7 +55,7 @@ def twitterTweetBot():
     tweetRssLog = []
     #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
     tweetNumbToPost = 1
-    with open('/root/twitterBot/tweetBotLogger.csv', 'rb') as tweetLog:
+    with open(str(pwdDir())+str('/tweetBotLogger.csv'), 'rb') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow[0])
@@ -82,7 +87,7 @@ def twitterTweetBot():
                 passString = rssFeedTitle + " " + tinyurl.create_one(rssFeedLinkURL) + " " + RssFeedHashTag
                 tweetPoster(passString)
                 tweetLimitCount += 1
-                with open('/root/twitterBot/tweetBotLogger.csv', 'a') as tweetLog:
+                with open(str(pwdDir())+str('/tweetBotLogger.csv'), 'a') as tweetLog:
                     tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
                     tweetLogFile.writerow([rssSerialNumber])
             else:
