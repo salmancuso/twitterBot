@@ -5,6 +5,15 @@ import os
 import csv
 import datetime
 
+def randomDice():
+    threshold = 30
+    roll =(int(random.uniform(1, 100)))
+    if roll < int(threshold):
+        return True
+    else:
+        return False
+
+
 tweetRssLog =[]
 
 #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
