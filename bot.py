@@ -1,9 +1,10 @@
 import tweepy
 import feedparser
 import tinyurl
-import os
+import random
 import csv
 import datetime
+import re
 
 def randomDice():
     threshold = 30
@@ -13,17 +14,10 @@ def randomDice():
     else:
         return False
 
-
-tweetRssLog =[]
-
-#### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
-tweetNumbToPost = 1
-
-#### CHANGE THE START AND END HOUR FOR EXAMPLE
-#### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
-#### HOUR CLOCK
-startTime = 6 # Start at 6 am
-endTime = 21 # end at 9pm
+def getCreds():
+    with open('mycreds.csv', 'r') as credsRaw:
+        credsData = csv.reader(credsRaw, delimiter=",")
+        return credsData
 
 
 #### TWITTER API INTERFACE, ADD YOUR KEYS AND TOKENS
@@ -31,10 +25,11 @@ endTime = 21 # end at 9pm
 #### AT http://apps.twitter.com
 def tweetPoster(tweetString):
     # Consumer keys and access tokens, used for OAuth
-    consumer_key = 'YOUR-CONSUMER-KEY-HERE-IN-QUOTES'
-    consumer_secret = 'YOUR-CONSUMER-SECRET-HERE-IN-QUOTES'
-    access_token = 'YOUR-ACCESS-TOKEN-HERE-IN-QUOTES'
-    access_token_secret = 'YOUR-ACCESS-TOKEN-SECRET-HERE-IN-QUOTES'
+    creds=getCreds()
+    consumer_key = creds[0]
+    consumer_secret = creds[0]
+    access_token = creds[0]
+    access_token_secret = creds[0]
 
     # OAuth process, using the keys and tokens
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -47,33 +42,15 @@ def tweetPoster(tweetString):
 
 #### CLEAN UP SERIAL NUMBER FOR TRACKING
 def charcterCleaner(dataString):
-    dataString = dataString.replace('.', '')
-    dataString = dataString.replace('!', '')
-    dataString = dataString.replace(',', '')
-    dataString = dataString.replace('-', '')
-    dataString = dataString.replace("'", '')
-    dataString = dataString.replace('@', '')
-    dataString = dataString.replace('#', '')
-    dataString = dataString.replace('$', '')
-    dataString = dataString.replace('%', '')
-    dataString = dataString.replace('^', '')
-    dataString = dataString.replace('&', '')
-    dataString = dataString.replace('*', '')
-    dataString = dataString.replace("(", '')
-    dataString = dataString.replace(')', '')
-    dataString = dataString.replace('_', '')
-    dataString = dataString.replace('?', '')
-    dataString = dataString.replace(' ', '')
-    dataString = dataString.replace(';', '')
-    dataString = dataString.replace(':', '')
-    dataString = dataString.replace('"', '')
-    dataString = dataString.replace('/', '')
-    dataString = dataString.replace('=', '')
-    dataString = dataString.replace('~', '')
+    dataString = re.sub('[^A-Za-z0-9]+', '', dataString)
     return dataString
 
 #### TWEET PROCESSING
 def twitterTweetBot():
+    #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
+    tweetNumbToPost = 1
+
+    tweetRssLog = []
     with open('tweetBotLogger.csv', 'rb') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         for eachRow in tweetLogFile:
@@ -98,7 +75,7 @@ def twitterTweetBot():
                         tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
                         tweetLogFile.writerow([rssSerialNumber])
                         passString = rssFeedTitle + " " + tinyurl.create_one(rssFeedLinkURL) + " " + RssFeedHashTag
-                        if len(passString)>140:
+                        if len(passString)>280:
                             None
                         else:
                             if tweetLimitCount <= tweetNumbToPost:
@@ -112,5 +89,10 @@ def twitterTweetBot():
 #### CHANGE THE HOURS TO CHANGE POSTING WITHIN TIMES
 #### THIS IS POSTING BETWEEN 6AM & 9PM
 currentHour = datetime.datetime.now().hour
+#### CHANGE THE START AND END HOUR FOR EXAMPLE
+#### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
+#### HOUR CLOCK
+startTime = 6  # Start at 6 am
+endTime = 21  # end at 9pm
 if currentHour >= startTime and currentHour <= endTime:
     twitterTweetBot()
