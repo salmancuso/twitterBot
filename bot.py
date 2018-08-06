@@ -9,15 +9,6 @@ import sys
 import re
 
 
-def randomDice():
-    threshold = 30
-    roll = (int(random.uniform(1, 100)))
-    if roll < int(threshold):
-        return True
-    else:
-        return False
-
-
 def getCreds():
     with open('mycreds.csv', 'r') as credsRaw:
         credsData = csv.reader(credsRaw, delimiter=",")
@@ -29,9 +20,9 @@ def tweetPoster(tweetString):
     # Consumer keys and access tokens, used for OAuth
     creds = getCreds()
     consumer_key = creds[0]
-    consumer_secret = creds[0]
-    access_token = creds[0]
-    access_token_secret = creds[0]
+    consumer_secret = creds[1]
+    access_token = creds[2]
+    access_token_secret = creds[3]
 
     # OAuth process, using the keys and tokens
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
