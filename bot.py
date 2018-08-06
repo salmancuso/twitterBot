@@ -5,6 +5,7 @@ import random
 import csv
 import datetime
 import re
+import time
 
 def randomDice():
     threshold = 30
@@ -95,4 +96,6 @@ currentHour = datetime.datetime.now().hour
 startTime = 6  # Start at 6 am
 endTime = 21  # end at 9pm
 if currentHour >= startTime and currentHour <= endTime:
-    twitterTweetBot()
+    if randomDice == True:
+        time.sleep(int(random.uniform(1, 30)))
+        twitterTweetBot()
