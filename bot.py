@@ -1,6 +1,6 @@
 import tweepy
-# import feedparser
-# import tinyurl
+import feedparser
+import tinyurl
 import csv
 import time
 import datetime
