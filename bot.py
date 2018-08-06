@@ -120,7 +120,7 @@ if __name__ == "__main__":
             if currentHour >= startTime and currentHour <= endTime:
                 print ("Weekday")
                 # print ("""Sleep time {}""".format(sleepTime))
-                # time.sleep(sleepTime)
+                time.sleep(sleepTime)
                 twitterTweetBot()
             else:
                 sys.exit()
