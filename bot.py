@@ -31,6 +31,7 @@ def tweetPoster(tweetString):
     consumer_secret = creds[0][1]
     access_token = creds[0][2]
     access_token_secret = creds[0][3]
+    print str(pwdDir())+str('/mycreds.csv')
     print consumer_key
     print consumer_secret
     print access_token
