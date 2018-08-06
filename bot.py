@@ -31,21 +31,25 @@ def tweetPoster(tweetString):
     consumer_secret = creds[0][1]
     access_token = creds[0][2]
     access_token_secret = creds[0][3]
+    print consumer_key
+    print consumer_secret
+    print access_token
+    print access_token_secret
 
-    # OAuth process, using the keys and tokens
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-
-    # Creation of the actual interface, using authentication
-    api = tweepy.API(auth)
-    # Sample method, used to update a status
-    # api.update_status(status = tweetString)
-    geos = [[37.427621, -122.161944], [37.793372, -122.39711], [37.334308, -121.890445], [38.897691, -77.036488],
-            [38.889804, -77.009185], [40.762374, -73.973912]]
-    cords = random.choice(geos)
-    latitude = cords[0]
-    longitude = cords[1]
-    api.update_status(status=tweetString, lat=latitude, long=longitude)
+    # # OAuth process, using the keys and tokens
+    # auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    # auth.set_access_token(access_token, access_token_secret)
+    #
+    # # Creation of the actual interface, using authentication
+    # api = tweepy.API(auth)
+    # # Sample method, used to update a status
+    # # api.update_status(status = tweetString)
+    # geos = [[37.427621, -122.161944], [37.793372, -122.39711], [37.334308, -121.890445], [38.897691, -77.036488],
+    #         [38.889804, -77.009185], [40.762374, -73.973912]]
+    # cords = random.choice(geos)
+    # latitude = cords[0]
+    # longitude = cords[1]
+    # api.update_status(status=tweetString, lat=latitude, long=longitude)
 
 
 #### CLEAN UP SERIAL NUMBER FOR TRACKING
