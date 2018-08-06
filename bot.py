@@ -1,6 +1,6 @@
 import tweepy
-import feedparser
-import tinyurl
+# import feedparser
+# import tinyurl
 import csv
 import time
 import datetime
@@ -15,19 +15,22 @@ def pwdDir ():
     return dir_path
 
 def getCreds():
+    credList = []
     with open(str(pwdDir())+str('/mycreds.csv'), 'r') as credsRaw:
         credsData = csv.reader(credsRaw, delimiter=",")
-        return credsData
+        for item in credsData:
+            credList.append(item)
+        return credList
 
 
 #### TWITTER API INTERFACE, ADD YOUR KEYS AND TOKENS
 def tweetPoster(tweetString):
     # Consumer keys and access tokens, used for OAuth
     creds = getCreds()
-    consumer_key = creds[0]
-    consumer_secret = creds[1]
-    access_token = creds[2]
-    access_token_secret = creds[3]
+    consumer_key = creds[0][0]
+    consumer_secret = creds[0][1]
+    access_token = creds[0][2]
+    access_token_secret = creds[0][3]
 
     # OAuth process, using the keys and tokens
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -117,7 +120,7 @@ if __name__ == "__main__":
             if currentHour >= startTime and currentHour <= endTime:
                 print ("Weekday")
                 # print ("""Sleep time {}""".format(sleepTime))
-                time.sleep(sleepTime)
+                # time.sleep(sleepTime)
                 twitterTweetBot()
             else:
                 sys.exit()
