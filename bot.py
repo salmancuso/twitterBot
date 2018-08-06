@@ -54,7 +54,6 @@ def charcterCleaner(dataString):
     dataString = re.sub('[^A-Za-z0-9]+', '', str(dataString))
     return dataString
 
-
 #### TWEET PROCESSING
 def twitterTweetBot():
     tweetRssLog = []
