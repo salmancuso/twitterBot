@@ -106,30 +106,23 @@ if __name__ == "__main__":
     #### CHANGE THE START AND END HOUR FOR EXAMPLE
     #### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
     #### HOUR CLOCK
-    startTime = 6  # Start at 6 am
+    startTime = 5  # Start at 5 am
     endTime = 21  # end at 9pm
 
     randomNumber = random.randint(0, 55)
     print (randomNumber)
     if randomNumber <= 38:
-        sleepTime = randomNumber * 60
+        # sleepTime = randomNumber * 60
+        sleepTime = 1 ### Use this for testing only 
         currentHour = datetime.datetime.now().hour
         dayOfTheWeek = datetime.datetime.today().weekday()
-        print ("the day of the week is {}".format(dayOfTheWeek))
         print ("the current hours is {}".format(currentHour))
-        if dayOfTheWeek > 4 and dayOfTheWeek <= 6:
-            print ("weekend")
+        if currentHour >= startTime and currentHour <= endTime:
+            time.sleep(sleepTime)
+            twitterTweetBot()
+        else:
             sys.exit()
             None
-        else:
-            if currentHour >= startTime and currentHour <= endTime:
-                print ("Weekday")
-                # print ("""Sleep time {}""".format(sleepTime))
-                time.sleep(sleepTime)
-                twitterTweetBot()
-            else:
-                sys.exit()
-                None
     else:
         sys.exit()
         None
