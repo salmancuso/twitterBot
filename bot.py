@@ -46,8 +46,9 @@ def tweetPoster(tweetString):
     api = tweepy.API(auth)
     # Sample method, used to update a status
     # api.update_status(status = tweetString)
-    geos = [[37.427621, -122.161944], [37.793372, -122.39711], [37.334308, -121.890445], [38.897691, -77.036488],
-            [38.889804, -77.009185], [40.762374, -73.973912]]
+    geos = [[37.427621,-122.161944], [37.793372,-122.39711], [37.334308,-121.890445], [38.897691,-77.036488],
+            [38.889804,-77.009185], [40.762374,-73.973912],[37.3323,-121.8897], [37.22215,-121.98388], [37.79457,-122.400264],
+            [47.603017,-122.33872]]
     cords = random.choice(geos)
     latitude = cords[0]
     longitude = cords[1]
@@ -79,7 +80,16 @@ def twitterTweetBot():
                      "http://feeds.arstechnica.com/arstechnica/technology-lab": "#tech",
                      "http://feeds.arstechnica.com/arstechnica/business": "#tech #business",
                      "http://feeds.arstechnica.com/arstechnica/security": "#security #hacktivism",
-                     "http://feeds.arstechnica.com/arstechnica/tech-policy": "#tech #law"}
+                     "http://feeds.arstechnica.com/arstechnica/tech-policy": "#tech #law",
+                     "https://krebsonsecurity.com/feed/": "#security #data",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=644&f_ln=Attacks/Breaches": "#security #data #breach",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=645&f_ln=Application%20Security": "#security #data #Application",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=647&f_ln=Cloud": "#cloud #data",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=649&f_ln=Authentication": "#authentication #security",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=650&f_ln=Privacy": "#privacy #data",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=661&f_ln=Vulnerabilities%20/%20Threats": "#Vulnerability #security",
+                     "https://www.darkreading.com/rss_simple.asp?f_n=659&f_ln=Threat%20Intelligence": "#ThreatIntelligence #security #data"
+                     }
 
     feedRow = (random.choice(list(tweetDict.items())))
     RssFeedURL = feedRow[0]
