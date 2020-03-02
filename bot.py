@@ -1,6 +1,5 @@
 import tweepy
 import feedparser
-import tinyurl
 import csv
 import time
 import datetime
@@ -8,6 +7,12 @@ import random
 import sys
 import re
 import os
+import urllib.request
+
+def tiny_url(url):
+    apiurl = "http://tinyurl.com/api-create.php?url="
+    tinyurl = urllib.request.urlopen(apiurl + url).read()
+    return tinyurl.decode("utf-8")
 
 
 def pwdDir ():
@@ -85,9 +90,9 @@ def twitterTweetBot():
         rssFeedLinkURL = feed.link
         rssSerialNumber = charcterCleaner(feed.link)[8:48]
         if rssSerialNumber not in tweetRssLog:
-            print rssSerialNumber
+            print (rssSerialNumber)
             if tweetLimitCount < tweetNumbToPost:
-                passString = rssFeedTitle + " " + tinyurl.create_one(rssFeedLinkURL) + " " + RssFeedHashTag
+                passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
                 tweetPoster(passString)
                 tweetLimitCount += 1
                 with open(str(pwdDir())+str('/tweetBotLogger.csv'), 'a') as tweetLog:
@@ -105,7 +110,7 @@ if __name__ == "__main__":
     endTime = 21  # end at 9pm
 
     randomNumber = random.randint(0, 55)
-    print randomNumber
+    print (randomNumber)
     if randomNumber <= 38:
         sleepTime = randomNumber * 60
         currentHour = datetime.datetime.now().hour
@@ -113,7 +118,7 @@ if __name__ == "__main__":
         print ("the day of the week is {}".format(dayOfTheWeek))
         print ("the current hours is {}".format(currentHour))
         if dayOfTheWeek > 4 and dayOfTheWeek <= 6:
-            # print ("weekend")
+            print ("weekend")
             sys.exit()
             None
         else:
