@@ -119,22 +119,23 @@ if __name__ == "__main__":
     #### HOUR CLOCK
     startTime = 5  # Start at 5 am
     endTime = 21  # end at 9pm
-
-    randomNumber = random.randint(0, 55)
-    print (randomNumber)
-    if randomNumber <= 38:
-        sleepTime = randomNumber * 30
-        # sleepTime = 1 ### Use this for testing only 
-        currentHour = datetime.datetime.now().hour
-        dayOfTheWeek = datetime.datetime.today().weekday()
-        print ("the current hours is {}".format(currentHour))
-        if currentHour >= startTime and currentHour <= endTime:
-            time.sleep(sleepTime)
-            twitterTweetBot()
-        else:
-            sys.exit()
-            None
-    else:
-        sys.exit()
-        None
+    twitterTweetBot()
+    
+    # randomNumber = random.randint(0, 55)
+    # print (randomNumber)
+    # if randomNumber <= 38:
+    #     sleepTime = randomNumber * 30
+    #     # sleepTime = 1 ### Use this for testing only 
+    #     currentHour = datetime.datetime.now().hour
+    #     dayOfTheWeek = datetime.datetime.today().weekday()
+    #     print ("the current hours is {}".format(currentHour))
+    #     if currentHour >= startTime and currentHour <= endTime:
+    #         time.sleep(sleepTime)
+    #         twitterTweetBot()
+    #     else:
+    #         sys.exit()
+    #         None
+    # else:
+    #     sys.exit()
+    #     None
 
