@@ -138,7 +138,7 @@ if __name__ == "__main__":
     #### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
     #### HOUR CLOCK
     startTime = 5  # Start at 5 am
-    endTime = 21  # end at 9pm
+    endTime = 23  # end at 9pm
 
     randomNumber = random.randint(0, 55)
     print (randomNumber)
