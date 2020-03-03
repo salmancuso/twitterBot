@@ -65,7 +65,7 @@ def twitterTweetBot():
     tweetRssLog = []
     #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
     tweetNumbToPost = 1
-    with open(str(pwdDir())+str('/root/twitterBot/tweetBotLogger.csv'), 'rb') as tweetLog:
+    with open(str(pwdDir())+str('/tweetBotLogger.csv'), 'rb') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         print (tweetLogFile)
         for eachRow in tweetLogFile:
