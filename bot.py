@@ -70,7 +70,7 @@ def twitterTweetBot():
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow)
-        print(tweetRssLog)
+        # print(tweetRssLog)
 
         tweetDict = {"http://feeds.feedburner.com/TechCrunchIT": "#tech",
                      "http://feeds.feedburner.com/TechCrunch/startups": "#startup",
@@ -149,6 +149,7 @@ if __name__ == "__main__":
         dayOfTheWeek = datetime.datetime.today().weekday()
         print ("the current hours is {}".format(currentHour))
         if currentHour >= startTime and currentHour <= endTime:
+            print("Posting)")
             time.sleep(sleepTime)
             twitterTweetBot()
         else:
