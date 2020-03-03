@@ -112,6 +112,7 @@ def twitterTweetBot():
                     }
 
     feedRow = (random.choice(list(tweetDict.items())))
+    print(feedRow)
     RssFeedURL = feedRow[0]
     RssFeedHashTag = feedRow[1]
     tweetLimitCount = 0
