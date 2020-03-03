@@ -67,7 +67,7 @@ def twitterTweetBot():
     tweetNumbToPost = 1
     with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'r') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
-        tweetLogFile = tweetlogFile.read()
+        tweetLogFile = tweetLogFile.read()
         print (tweetLogFile)
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow[0])
