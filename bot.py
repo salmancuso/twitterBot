@@ -114,6 +114,7 @@ def twitterTweetBot():
     getRss = feedparser.parse(RssFeedURL)
     time.sleep(2)
     for feed in getRss.entries:
+        print(feed)
         rssFeedTitle = feed.title
         rssFeedLinkURL = feed.link
         rssSerialNumber = charcterCleaner(feed.link)[8:48]
