@@ -116,11 +116,16 @@ def twitterTweetBot():
         rssFeedTitle = feed.title
         rssFeedLinkURL = feed.link
         rssSerialNumber = charcterCleaner(feed.link)[8:48]
-        if rssSerialNumber not in tweetRssLog:
-            # print (rssSerialNumber)
+        print("Checking if already posted")
+        if rssSerialNumber in tweetRssLog:
+            None
+        else:
+            print (rssSerialNumber)
+            print ("Going to post")
             if tweetLimitCount < tweetNumbToPost:
                 passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
                 tweetPoster(passString)
+                print ("Should have posted")
                 tweetLimitCount += 1
                 with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'a') as tweetLog:
                     tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
