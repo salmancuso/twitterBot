@@ -31,6 +31,8 @@ def getCreds():
 
 #### TWITTER API INTERFACE, ADD YOUR KEYS AND TOKENS
 def tweetPoster(tweetString):
+    print("Tweeting -------------- TWEETING")
+
     # Consumer keys and access tokens, used for OAuth
     creds = getCreds()
     consumer_key = creds[0][0]
@@ -52,8 +54,11 @@ def tweetPoster(tweetString):
     cords = random.choice(geos)
     latitude = cords[0]
     longitude = cords[1]
-    print(tweetString)
     api.update_status(status=tweetString, lat=latitude, long=longitude)
+    print(tweetString)
+    print("Tweet Posted")
+
+
 
 
 #### CLEAN UP SERIAL NUMBER FOR TRACKING
@@ -119,7 +124,6 @@ def twitterTweetBot():
             # print (rssSerialNumber)
             if tweetLimitCount < tweetNumbToPost:
                 passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
-                print(passString)
                 tweetPoster(passString)
                 tweetLimitCount += 1
                 with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'a') as tweetLog:
