@@ -101,14 +101,7 @@ def twitterTweetBot():
                      "https://dataconomy.com/":"#data #DataScience #DataEngineering",
                      "https://www.hackread.com/surveillance/drones/":"#drone #security #surveillance",
                      "https://www.hackread.com/surveillance/nsa/": "#nsa #security #surveillance",
-                     "https://www.hackread.com/surveillance/privacy/":"#privacy #security #surveillance",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=644&f_ln=Attacks/Breaches": "#security #data #breach",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=645&f_ln=Application%20Security": "#security #data #Application",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=647&f_ln=Cloud": "#cloud #data",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=649&f_ln=Authentication": "#authentication #security",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=650&f_ln=Privacy": "#privacy #data",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=661&f_ln=Vulnerabilities%20/%20Threats": "#Vulnerability #security",
-                     "https://www.darkreading.com/rss_simple.asp?f_n=659&f_ln=Threat%20Intelligence": "#ThreatIntelligence #security #data"
+                     "https://www.hackread.com/surveillance/privacy/":"#privacy #security #surveillance"
                      }
 
     feedRow = (random.choice(list(tweetDict.items())))
@@ -124,6 +117,7 @@ def twitterTweetBot():
             # print (rssSerialNumber)
             if tweetLimitCount < tweetNumbToPost:
                 passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
+                print(passString)
                 tweetPoster(passString)
                 tweetLimitCount += 1
                 with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'a') as tweetLog:
@@ -138,25 +132,22 @@ if __name__ == "__main__":
     #### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
     #### HOUR CLOCK
     startTime = 5  # Start at 5 am
-    endTime = 23  # end at 9pm
+    endTime = 25  # end at 9pm
     twitterTweetBot()
 
-    # randomNumber = random.randint(0, 55)
-    # print (randomNumber)
-    # if randomNumber <= 38:
-    #     # sleepTime = randomNumber * 30
-    #     sleepTime = 1 ### Use this for testing only 
-    #     currentHour = datetime.datetime.now().hour
-    #     dayOfTheWeek = datetime.datetime.today().weekday()
-    #     print ("the current hours is {}".format(currentHour))
-    #     if currentHour >= startTime and currentHour <= endTime:
-    #         print("Posting")
-    #         time.sleep(sleepTime)
-    #         twitterTweetBot()
-    #     else:
-    #         sys.exit()
-    #         None
-    # else:
-    #     sys.exit()
-    #     None
+    randomNumber = random.randint(0, 55)
+    print (randomNumber)
+    if randomNumber <= 38:
+        sleepTime = randomNumber * 30
+        currentHour = datetime.datetime.now().hour
+        if currentHour >= startTime and currentHour <= endTime:
+            print("Posting")
+            # time.sleep(sleepTime)
+            twitterTweetBot()
+        else:
+            sys.exit()
+            None
+    else:
+        sys.exit()
+        None
 
