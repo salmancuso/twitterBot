@@ -65,7 +65,7 @@ def twitterTweetBot():
     tweetRssLog = []
     #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
     tweetNumbToPost = 1
-    with open(str(pwdDir())+str('/tweetBotLogger.csv'), 'rb') as tweetLog:
+    with open(str(pwdDir())+str('./tweetBotLogger.csv'), 'r') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow[0])
@@ -120,7 +120,7 @@ if __name__ == "__main__":
     startTime = 5  # Start at 5 am
     endTime = 21  # end at 9pm
     twitterTweetBot()
-    
+
     # randomNumber = random.randint(0, 55)
     # print (randomNumber)
     # if randomNumber <= 38:
