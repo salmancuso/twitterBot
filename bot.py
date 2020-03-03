@@ -53,7 +53,7 @@ def tweetPoster(tweetString):
     latitude = cords[0]
     longitude = cords[1]
     print(tweetString)
-    # api.update_status(status=tweetString, lat=latitude, long=longitude)
+    api.update_status(status=tweetString, lat=latitude, long=longitude)
 
 
 #### CLEAN UP SERIAL NUMBER FOR TRACKING
@@ -121,7 +121,7 @@ def twitterTweetBot():
         rssFeedLinkURL = feed.link
         rssSerialNumber = charcterCleaner(feed.link)[8:48]
         if rssSerialNumber not in tweetRssLog:
-            print (rssSerialNumber)
+            # print (rssSerialNumber)
             if tweetLimitCount < tweetNumbToPost:
                 passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
                 tweetPoster(passString)
@@ -149,7 +149,7 @@ if __name__ == "__main__":
         dayOfTheWeek = datetime.datetime.today().weekday()
         print ("the current hours is {}".format(currentHour))
         if currentHour >= startTime and currentHour <= endTime:
-            print("Posting)")
+            print("Posting")
             time.sleep(sleepTime)
             twitterTweetBot()
         else:
