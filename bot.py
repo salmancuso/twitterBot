@@ -65,7 +65,7 @@ def twitterTweetBot():
     tweetRssLog = []
     #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
     tweetNumbToPost = 1
-    with open(str(pwdDir())+str('/tweetBotLogger.csv'), 'rb') as tweetLog:
+    with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'rb') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         print (tweetLogFile)
         for eachRow in tweetLogFile:
@@ -107,7 +107,7 @@ def twitterTweetBot():
                 passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
                 tweetPoster(passString)
                 tweetLimitCount += 1
-                with open(str(pwdDir())+str('/root/twitterBot/tweetBotLogger.csv'), 'a') as tweetLog:
+                with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'a') as tweetLog:
                     tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
                     tweetLogFile.writerow([rssSerialNumber])
             else:
