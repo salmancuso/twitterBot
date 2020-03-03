@@ -56,7 +56,6 @@ def tweetPoster(tweetString):
     latitude = cords[0]
     longitude = cords[1]
     api.update_status(status=tweetString, lat=latitude, long=longitude)
-    print("Tweet Posted")
 
 
 
