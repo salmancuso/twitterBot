@@ -143,8 +143,8 @@ if __name__ == "__main__":
     randomNumber = random.randint(0, 55)
     print (randomNumber)
     if randomNumber <= 38:
-        # sleepTime = randomNumber * 30
-        sleepTime = 1 ### Use this for testing only 
+        sleepTime = randomNumber * 30
+        # sleepTime = 1 ### Use this for testing only 
         currentHour = datetime.datetime.now().hour
         dayOfTheWeek = datetime.datetime.today().weekday()
         print ("the current hours is {}".format(currentHour))
