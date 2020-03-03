@@ -11,3 +11,5 @@ def pwdDir ():
         print (tweetLogFile)
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow[0])
+
+        print(tweetRssLog)
