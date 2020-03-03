@@ -68,9 +68,9 @@ def twitterTweetBot():
     tweetNumbToPost = 1
     with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'r') as tweetLog:
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
-        print (tweetLogFile)
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow)
+        print(tweetRssLog)
 
         tweetDict = {"http://feeds.feedburner.com/TechCrunchIT": "#tech",
                      "http://feeds.feedburner.com/TechCrunch/startups": "#startup",
