@@ -6,10 +6,10 @@ def pwdDir ():
     return dir_path
 
 
-    with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'r') as tweetLog:
-        tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
-        print (tweetLogFile)
-        for eachRow in tweetLogFile:
-            tweetRssLog.append(eachRow[0])
+with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'r') as tweetLog:
+    tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
+    print (tweetLogFile)
+    for eachRow in tweetLogFile:
+        tweetRssLog.append(eachRow[0])
 
-        print(tweetRssLog)
+    print(tweetRssLog)
