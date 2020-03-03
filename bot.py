@@ -139,7 +139,6 @@ if __name__ == "__main__":
     #### HOUR CLOCK
     startTime = 5  # Start at 5 am
     endTime = 25  # end at 9pm
-    twitterTweetBot()
 
     randomNumber = random.randint(0, 55)
     print (randomNumber)
@@ -148,7 +147,6 @@ if __name__ == "__main__":
         currentHour = datetime.datetime.now().hour
         print("Current Hour: {}".format(currentHour))
         if currentHour >= startTime and currentHour <= endTime:
-            print("Posting")
             # time.sleep(sleepTime)
             twitterTweetBot()
         else:
