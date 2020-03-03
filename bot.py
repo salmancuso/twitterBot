@@ -74,7 +74,8 @@ def twitterTweetBot():
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         for eachRow in tweetLogFile:
             tweetRssLog.append(eachRow)
-        # print(tweetRssLog)
+    
+    print(tweetRssLog)
     
 
     tweetDict = {"http://feeds.feedburner.com/TechCrunchIT": "#tech",
@@ -111,6 +112,7 @@ def twitterTweetBot():
     RssFeedHashTag = feedRow[1]
     tweetLimitCount = 0
     getRss = feedparser.parse(RssFeedURL)
+    time.sleep(2)
     for feed in getRss.entries:
         rssFeedTitle = feed.title
         rssFeedLinkURL = feed.link
@@ -119,9 +121,9 @@ def twitterTweetBot():
         if rssSerialNumber in tweetRssLog:
             None
         else:
-            print (rssSerialNumber)
-            print ("Going to post")
             if tweetLimitCount < tweetNumbToPost:
+                print (rssSerialNumber)
+                print ("Going to post")
                 passString = rssFeedTitle + " " + tiny_url(rssFeedLinkURL) + " " + RssFeedHashTag
                 tweetPoster(passString)
                 print ("Should have posted")
