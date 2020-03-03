@@ -67,7 +67,6 @@ def charcterCleaner(dataString):
 
 #### TWEET PROCESSING
 def twitterTweetBot():
-    print("starting post")
     tweetRssLog = []
     #### CHANGE THE NUMBER OF TWEETS TO POST PER CYCLE
     tweetNumbToPost = 1
