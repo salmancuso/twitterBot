@@ -32,6 +32,7 @@ def getCreds():
 #### TWITTER API INTERFACE, ADD YOUR KEYS AND TOKENS
 def tweetPoster(tweetString):
     print("Tweeting -------------- TWEETING")
+    print(tweetString)
 
     # Consumer keys and access tokens, used for OAuth
     creds = getCreds()
@@ -55,7 +56,6 @@ def tweetPoster(tweetString):
     latitude = cords[0]
     longitude = cords[1]
     api.update_status(status=tweetString, lat=latitude, long=longitude)
-    print(tweetString)
     print("Tweet Posted")
 
 
