@@ -134,25 +134,27 @@ def twitterTweetBot():
 
 
 if __name__ == "__main__":
-    #### CHANGE THE START AND END HOUR FOR EXAMPLE
-    #### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
-    #### HOUR CLOCK
-    startTime = 5  # Start at 5 am
-    endTime = 21  # end at 9pm
+    twitterTweetBot()
 
-    randomNumber = random.randint(0, 55)
-    print (randomNumber)
-    if randomNumber <= 38:
-        sleepTime = randomNumber * 30
-        currentHour = datetime.datetime.now().hour
-        print("Current Hour: {}".format(currentHour))
-        if currentHour >= startTime and currentHour <= endTime:
-            time.sleep(sleepTime)
-            twitterTweetBot()
-        else:
-            sys.exit()
-            None
-    else:
-        sys.exit()
-        None
+    # #### CHANGE THE START AND END HOUR FOR EXAMPLE
+    # #### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
+    # #### HOUR CLOCK
+    # startTime = 5  # Start at 5 am
+    # endTime = 21  # end at 9pm
+
+    # randomNumber = random.randint(0, 55)
+    # print (randomNumber)
+    # if randomNumber <= 38:
+    #     sleepTime = randomNumber * 30
+    #     currentHour = datetime.datetime.now().hour
+    #     print("Current Hour: {}".format(currentHour))
+    #     if currentHour >= startTime and currentHour <= endTime:
+    #         time.sleep(sleepTime)
+    #         twitterTweetBot()
+    #     else:
+    #         sys.exit()
+    #         None
+    # else:
+    #     sys.exit()
+    #     None
 
