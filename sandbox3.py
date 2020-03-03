@@ -6,7 +6,8 @@ def pwdDir ():
     return dir_path
 
 
-with open(str(pwdDir())+str('/mycreds.csv'), 'r') as credsRaw:
-    credsData = csv.reader(credsRaw, delimiter=",")
-    for row in credsData:
-        print (row)
+    with open(str('{}/tweetBotLogger.csv'.format(pwdDir())), 'r') as tweetLog:
+        tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
+        print (tweetLogFile)
+        for eachRow in tweetLogFile:
+            tweetRssLog.append(eachRow[0])
