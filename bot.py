@@ -52,7 +52,8 @@ def tweetPoster(tweetString):
     cords = random.choice(geos)
     latitude = cords[0]
     longitude = cords[1]
-    api.update_status(status=tweetString, lat=latitude, long=longitude)
+    print(tweetString)
+    # api.update_status(status=tweetString, lat=latitude, long=longitude)
 
 
 #### CLEAN UP SERIAL NUMBER FOR TRACKING
