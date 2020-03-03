@@ -22,7 +22,7 @@ def pwdDir ():
 
 def getCreds():
     credList = []
-    with open(str(pwdDir())+str('/mycreds.csv'), 'r') as credsRaw:
+    with open(str('{}//mycreds.csv'.format(pwdDir())), 'r') as credsRaw:
         credsData = csv.reader(credsRaw, delimiter=",")
         for item in credsData:
             credList.append(item)
@@ -69,7 +69,7 @@ def twitterTweetBot():
         tweetLogFile = csv.reader(tweetLog, delimiter=',', quotechar='"')
         print (tweetLogFile)
         for eachRow in tweetLogFile:
-            tweetRssLog.append(eachRow[0])
+            tweetRssLog.append(eachRow)
 
         tweetDict = {"http://feeds.feedburner.com/TechCrunchIT": "#tech",
                      "http://feeds.feedburner.com/TechCrunch/startups": "#startup",
