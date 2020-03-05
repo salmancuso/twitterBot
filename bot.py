@@ -90,7 +90,6 @@ def logToRead():
 
 def tweetPoster(tryCounter):
     feedCombo = feedToPost()
-
     logFile = list(logToRead())
     feedURL = feedCombo[0]
     feedHashTags = feedCombo[1]
@@ -103,7 +102,7 @@ def tweetPoster(tryCounter):
         # print(feedData[ "channel" ][ "link" ])
         for item in feedData["items"]:
             print("Attempt {}".format(tryCounter))
-            if tryCounter < 10:
+            if tryCounter < 2:
                 title = (item[ "title" ])
                 link = tinyUrl(item[ "link" ])
                 hashTags = (feedHashTags)
