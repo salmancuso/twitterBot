@@ -1,15 +1,31 @@
-#! /usr/bin/python3
-import tweepy
+#!/usr/bin/python3
 import feedparser
 import csv
-import time
-import datetime
-import random
 import sys
-import re
 import os
+import random
+import tweepy
+import re
 import urllib.request
+import datetime
 
+
+#### GET CURRENT FULL PATH TO DIRECTORY
+def pwdDir ():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    return dir_path
+
+#### GET CREDS AND CREATE LIST.
+def getCreds():
+    credList = []
+    with open(str('{}/mycreds.csv'.format(pwdDir())), 'r') as credsRaw:
+        credsData = csv.reader(credsRaw, delimiter=",")
+        for item in credsData:
+            credList.append(item)
+        return credList
+
+
+#### OPEN LIST OF RSS FEEDS AND RANDOMLY PICK ONE TO PUBLISH. 
 def feedToPost():
     feedList = []
     with open(str("{}/feeds.csv".format(pwdDir())), "r") as rawRSSfeeds:
@@ -21,35 +37,21 @@ def feedToPost():
     randomListReturn = (random.randint(0,len(feedList)-1))
     return (feedList[randomListReturn])
 
-def tiny_url(url):
+
+#### CLEAN UP SERIAL NUMBER FOR TRACKING
+def charcterCleaner(dataString):
+    dataString = re.sub('[^A-Za-z0-9]+', '', str(dataString))
+    dataString = str(dataString).upper()
+    return dataString
+
+#### BUILD A TINY URL TO PUSH 
+def tinyUrl(url):
     apiurl = "http://tinyurl.com/api-create.php?url="
     tinyurl = urllib.request.urlopen(apiurl + url).read()
     return tinyurl.decode("utf-8")
 
-def pwdDir ():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    return dir_path
-
-def getCreds():
-    credList = []
-    with open(str('{}/mycreds.csv'.format(pwdDir())), 'r') as credsRaw:
-        credsData = csv.reader(credsRaw, delimiter=",")
-        for item in credsData:
-            credList.append(item)
-        return credList
-
-def logToRead():
-    logList = []
-    with open(str('{}/logFile.csv'.format(pwdDir())), "r") as rawRSSlogs:
-        logsData = csv.reader(rawRSSlogs)
-        for logRow in logsData:
-            logURL = logRow[0]
-            logList.append(logURL)
-    logList = sorted(list(set(logList)))
-    return (logList)
-
 #### TWITTER API INTERFACE, ADD YOUR KEYS AND TOKENS
-def tweetPoster(tweetString):
+def tweetPusher(tweetString):
     # Consumer keys and access tokens, used for OAuth
     creds = getCreds()
     consumer_key = creds[0][0]
@@ -73,77 +75,76 @@ def tweetPoster(tweetString):
     longitude = cords[1]
     api.update_status(status=tweetString, lat=latitude, long=longitude)
 
-#### CLEAN UP SERIAL NUMBER FOR TRACKING
-def charcterCleaner(dataString):
-    dataString = re.sub('[^A-Za-z0-9]+', '', str(dataString))
-    return dataString
 
-#### TWEET PROCESSING
-def twitterTweetBot(logFile,cycleCount):
-    print("Cycle Count: {}".format(cycleCount))
-    if cycleCount < 30:
-        print("step0")
-        tweetRssLog = logToRead()
-        print("step1")
-        feedRow = feedToPost()
-        print("step2")
-        RssFeedURL = feedRow[0]
-        RssFeedHashTag = feedRow[1]
-        tweetLimitCount = 0
-        print("step3")
-        getRss = feedparser.parse(RssFeedURL)
-        print("step4")
-        entries = getRss.entries
-        time.sleep(1)
-        print("step5")
-        for feed in entries:
-            print("step6")
-            rssFeedTitle = feed.title
-            rssFeedLinkURL = feed.link
-            rssSerialNumber = charcterCleaner(feed.link)[8:100]
-            if rssSerialNumber not in tweetRssLog:
-                ### POST TO TWITTER ##########
-                print("POSTED TO TWITTER: {}".format(rssSerialNumber))
-                with open(logFile, 'a') as tweetLog:
-                    tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
-                    tweetLogFile.writerow([rssSerialNumber])
-                sys.exit()  #### End Program after post. 
+#### RETURN LIST OF POSTS ALREADY MADE
+def logToRead():
+    logList = []
+    with open(str('{}/logFile.csv'.format(pwdDir())), "r") as rawRSSlogs:
+        logsData = csv.reader(rawRSSlogs)
+        for logRow in logsData:
+            logURL = logRow[0]
+            logList.append(logURL)
+    logList = sorted(list(set(logList)))
+    return logList
+
+def tweetPoster(tryCounter):
+    feedCombo = feedToPost()
+
+    logFile = list(logToRead())
+    feedURL = feedCombo[0]
+    feedHashTags = feedCombo[1]
+    feedData = feedparser.parse(feedURL)
+    if feedData[ "bozo" ] == 0: ## if 0, then it is a good feed.
+        # print(feedData[ "bozo" ])
+        print(feedData[ "url" ])
+        # print(feedData[ "channel" ][ "title" ] )
+        # print(feedData[ "channel" ][ "description" ])
+        # print(feedData[ "channel" ][ "link" ])
+        for item in feedData["items"]:
+            print("Attempt {}".format(tryCounter))
+            if tryCounter < 10:
+                title = (item[ "title" ])
+                link = tinyUrl(item[ "link" ])
+                hashTags = (feedHashTags)
+                UID = str(charcterCleaner(str(title + link + hashTags)))[0:50]
+                print(UID)
+                if UID not in logFile:
+                    tweetString = ("""{} {} {}""".format(title, link, hashTags))
+                    tweetPusher(tweetString)
+                    print("POSTED TO TWITTER: {}".format(UID))
+                    with open(str('{}/logFile.csv'.format(pwdDir())), 'a') as tweetLog:
+                        tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
+                        tweetLogFile.writerow([UID])
+                    tryCounter += 1
+                    sys.exit()
+                    None
+                else:
+                    tryCounter += 1
             else:
-                print("Already Posted: {}".format(rssSerialNumber))
-                cycleCount+=1
-                twitterTweetBot(logFile,cycleCount)
-    else:
-        print("step7")
-        sys.exit()  #### End Program Nothing to post.
+                sys.exit()
+                None
 
 
 
-
-if __name__ == "__main__":
-    # logFile = str('{}/logFile.csv'.format(pwdDir()))
-    # twitterTweetBot(logFile, 0)
-
-
-    #### CHANGE THE START AND END HOUR FOR EXAMPLE
-    #### 5 IS 5 AM WHILE 20 IS 8PM BASED ON THE 24
+######################
+if __name__ == "__main__": 
     #### HOUR CLOCK
     startTime = 5  # Start at 5 am
     endTime = 21  # end at 9pm
 
     randomNumber = random.randint(0, 55)
     print (randomNumber)
-    if randomNumber <= 38:
+    if randomNumber <= 35:
         sleepTime = randomNumber * 30
         currentHour = datetime.datetime.now().hour
         print("Current Hour: {}".format(currentHour))
         if currentHour >= startTime and currentHour <= endTime:
-            # time.sleep(sleepTime)
-            logFile = str('{}/logFile.csv'.format(pwdDir()))
-            twitterTweetBot(logFile, 0)
+            time.sleep(sleepTime)
+            tryCounter = 0
+            tweetPoster(tryCounter)
         else:
             sys.exit()
             None
     else:
         sys.exit()
         None
-
