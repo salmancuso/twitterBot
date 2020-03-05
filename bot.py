@@ -82,7 +82,6 @@ def charcterCleaner(dataString):
 def twitterTweetBot(logFile,cycleCount):
     print("Cycle Count: {}".format(cycleCount))
     if cycleCount < 30:
-        print("step0")
         tweetRssLog = logToRead()
         print("step1")
         feedRow = feedToPost()
@@ -102,7 +101,7 @@ def twitterTweetBot(logFile,cycleCount):
             rssFeedLinkURL = feed.link
             rssSerialNumber = charcterCleaner(feed.link)[8:100]
             if rssSerialNumber not in tweetRssLog:
-                ### POST TO TWITTER ##########
+                tweetPoster(str("{} {} {}".format(rssFeedTitle,rssFeedLinkURL,rssSerialNumber)))
                 print("POSTED TO TWITTER: {}".format(rssSerialNumber))
                 with open(logFile, 'a') as tweetLog:
                     tweetLogFile = csv.writer(tweetLog, delimiter=',', quotechar='"')
