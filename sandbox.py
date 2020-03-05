@@ -8,6 +8,7 @@ import tweepy
 import re
 import urllib.request
 import datetime
+import time
 
 
 #### GET CURRENT FULL PATH TO DIRECTORY
