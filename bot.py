@@ -102,7 +102,7 @@ def tweetPoster(tryCounter):
         # print(feedData[ "channel" ][ "link" ])
         for item in feedData["items"]:
             print("Attempt {}".format(tryCounter))
-            if tryCounter < 2:
+            if tryCounter < 1:
                 title = (item[ "title" ])
                 link = tinyUrl(item[ "link" ])
                 hashTags = (feedHashTags)
@@ -123,7 +123,9 @@ def tweetPoster(tryCounter):
             else:
                 sys.exit()
                 None
-
+    else:
+        sys.exit()
+        None
 
 
 ######################
@@ -134,8 +136,8 @@ if __name__ == "__main__":
 
     randomNumber = random.randint(0, 55)
     print (randomNumber)
-    if randomNumber <= 35:
-        sleepTime = randomNumber * 30
+    if randomNumber <= 28:
+        sleepTime = randomNumber * 50
         currentHour = datetime.datetime.now().hour
         print("Current Hour: {}".format(currentHour))
         if currentHour >= startTime and currentHour <= endTime:
