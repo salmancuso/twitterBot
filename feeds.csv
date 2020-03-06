@@ -1,11 +1,6 @@
 https://www.hackread.com/feed/,#security #data #hacking #hacker
-http://feeds.feedburner.com/TechCrunchIT,#tech
-http://feeds.feedburner.com/TechCrunch/startups,#startup
-http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml,#tech
 https://www.wired.com/feed/category/security/latest/rss,#security
-https://www.wired.com/feed/rss,#tech #news
 https://www.wired.com/feed/category/science/latest/rss,#science
-https://www.wired.com/feed/category/business/latest/rss,#tech #business
 https://krebsonsecurity.com/feed,#security #data
 https://www.smartdatacollective.com/feed,#data #DataScience #DataEngineering
 https://insidebigdata.com/feed,#bigdata #data #DataScience #DataEngineering
@@ -25,3 +20,7 @@ http://feeds.feedburner.com/FeaturedBlogPosts-DataScienceCentral,#bigdata #data 
 https://www.analyticsvidhya.com/feed/,#bigdata #data #DataScience #DataEngineering
 https://blog.revolutionanalytics.com/atom.xml,#bigdata #data #DataScience #DataEngineering
 https://bluewhaleapps.com/feed,#AI #MachineLearning #data #DataEngineering
+https://www.thesanjoseblog.com/feeds/posts/default,#sanjose #california #bayarea #sanfranciscobayarea
+http://www.sanjoseinside.com/feed/,#sanjose #california #bayarea #sanfranciscobayarea
+https://sjdowntown.com/feed/,#sanjose #california #siliconvalley #sanfranciscobayarea
+"https://rss.bizjournals.com/feed/4d3b75f3af9d6c56af49b9e8a79ff847173c75c4/3033?market=sanfrancisco,sanjose&selectortype=channel&selectorvalue=15",#sanjose #california #siliconvalley #sanfranciscobayarea
