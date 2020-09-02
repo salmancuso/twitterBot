@@ -131,11 +131,15 @@ def tweetPoster(tryCounter):
 ######################
 if __name__ == "__main__": 
     #### HOUR CLOCK
-    startTime = 8  # Start at 8 am
-    endTime = 17 # end at 5 pm
+    startTime = 5  # Start at 8 am
+    endTime = 19 # end at 5 pm
 
     randomNumber = random.randint(0, 55)
     print (randomNumber)
+
+    # tweetPoster(0)
+
+
     if randomNumber <= 27:
         sleepTime = randomNumber * 50
         currentHour = datetime.datetime.now().hour
